@@ -1,0 +1,77 @@
+Dane zosta³y zebrane z prawie 300 Access Pointów (AP) nale¿¹cych do PWr.
+
+Poni¿sze dane zbierane s¹ co 5 minut:
+
+dataPomiaru  //rok-miesiac-dzien--godzina-minuta
+apName //nazwa AP, postaci: AP-nazwa_budynku-wyró¿nik
+bsnApIfNoOfUsers //liczba klientow na danym AP
+bsnAPIfDot11TransmittedFragmentCount
+bsnAPIfDot11MulticastTransmittedFrameCount
+bsnAPIfDot11RetryCount
+bsnAPIfDot11MultipleRetryCount
+bsnAPIfDot11FrameDuplicateCount
+bsnAPIfDot11RTSSuccessCount
+bsnAPIfDot11RTSFailureCount
+bsnAPIfDot11ACKFailureCount
+bsnAPIfDot11ReceivedFragmentCount
+bsnAPIfDot11MulticastReceivedFrameCount
+bsnAPIfDot11FCSErrorCount
+bsnAPIfDot11TransmittedFrameCount
+bsnAPIfDot11WEPUndecryptableCount
+bsnAPIfDot11FailedCount
+bsnAPIfLoadRxUtilization
+bsnAPIfLoadTxUtilization
+bsnAPIfLoadChannelUtilization
+bsnAPIfLoadNumOfClients
+bsnAPIfPoorSNRClients
+
+
+wiêcej informacji na temat tych parametrów mo¿na uzyskaæ pod podanymi linkami opisuj¹cymi poszczególne OIDy MIBa:
+
+http://tools.cisco.com/Support/SNMP/do/BrowseOID.do?local=en&translate=Translate&objectInput=1.3.6.1.4.1.14179.2.2.6.1.1#oidContent
+http://tools.cisco.com/Support/SNMP/do/BrowseOID.do?local=en&translate=Translate&objectInput=1.3.6.1.4.1.14179.2.2.13.1.1#oidContentbsnAPIfLoadRxUtilization
+
+------------------------------------------------		
+DANE TECHNICZNE SIECI PWR-WIFI
+
+Monitorowane AP posiadaj¹ dwa radia:
+2,4 GHz - 802.11b/g/n
+i
+5 Ghz   - 802.11a/n
+
+https://www.wireless.att.com/support_static_files/KB/KB3895.html
+
+AP NIE obs³uguj¹ standardu 802.11ac
+
+
+Ka¿dy punkt dostêpowy (AP) pod³¹czony jest przewodowo do jakiegoœ
+switcha w infrastrukturze PWr. Jest to jednak tylko po³¹czenie fizyczne.
+
+AP po w³¹czeniu pobiera adres IP i ³¹czy siê do kontrolera WiFi - tworzy
+bezpoœredni tunel do tego kontrolera. Po utworzenu takiego tunelu, ca³y
+ruch kliencki oraz kontrolny przesy³any jest przez ten tunel.
+
+Patrz¹c na to z niniejszego punktu widzenia, urz¹dzenia AP pod³¹czone s¹
+do kontrolera WiFi w topologii gwiazdy.
+
+Klienci sieci bezprzewodowej oraz przewodowej nie znajduj¹ siê w tym samym VLANie.
+
+
+AP pe³ni¹ tylko rolê "radia", przenosz¹ pakiety u¿ytkowników  do
+kontrolera WiFi.
+
+Za funkcje rutingu i bezpieczeñstwa (firewall) odpowiadaj¹ inne,
+wydzielone urz¹dzenia w infrastrukturze PWr.
+
+AP, zale¿nie od modelu, posiadaj¹ 6 albo 4 anteny.
+W modelach 6cio antenowych s¹ 3 anteny 2,4GHz i 3 anteny 5GHz, natomiast
+model 4o antenowy posiada anteny typu DualBand
+
+
+AP dzia³aj¹ w trybie Local.
+
+Ogólnie, proszê poczytaæ o protokole LWAPP L3:
+http://en.wikipedia.org/wiki/Lightweight_Access_Point_Protocol
+lub jego nowszej wersji, CAPWAP:
+http://en.wikipedia.org/wiki/Capwap
+

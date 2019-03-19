@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[64]:
 
 
 import pandas as pd
@@ -16,22 +16,54 @@ path = "./PWR-WiFi/2015-0[1, 2]"
 all_files = glob.glob(os.path.join(path, 'statystyki-wifi*.csv'), recursive=True)  
 
 #filter not matching files
-all_files = list(filter(lambda x: re.search('(statystyki-wifi-)\d\d\d\d[-]\d\d[-]\d\d.(csv)', x), all_files))
+all_files = list(filter(lambda x: re.search('(statystyki-wifi-)\d{4}[-]\d{2}[-]\d{2}.(csv)', x), all_files))
 
 # read and concatenate data from all files
 df_from_each_file = (pd.read_csv(f, header=None, sep=';', engine='python') for f in all_files)
 df = pd.concat(df_from_each_file, ignore_index=True)
 
+df.head()
 
-# In[4]:
 
+# In[66]:
 
-# give columns the names
-df.columns = ['datetime', 'location', 'column_2', 'column_3', 'column_4', 'column_5', 'column_6','column_7', 'column_8', 
-              'column_9', 'column_10', 'column_11', 'column_12', 'column_13','column_14', 'column_15', 'column_16',
-             'column_17', 'column_18', 'column_19', 'column_20', 'column_21', 'column_22']
 
 # trim the last semicolon in .csv treated by pandas as a column
-df = df.loc[:, :'column_21']
-df
+df = df.iloc[:, :22]
+
+# set columns names
+df.columns = ['datetime', 'location', 'bsnApIfNoOfUsers',
+'bsnAPIfDot11TransmittedFragmentCount',
+'bsnAPIfDot11MulticastTransmittedFrameCount',
+'bsnAPIfDot11RetryCount',
+'bsnAPIfDot11MultipleRetryCount',
+'bsnAPIfDot11FrameDuplicateCount',
+'bsnAPIfDot11RTSSuccessCount',
+'bsnAPIfDot11RTSFailureCount',
+'bsnAPIfDot11ACKFailureCount',
+'bsnAPIfDot11ReceivedFragmentCount',
+'bsnAPIfDot11MulticastReceivedFrameCount',
+'bsnAPIfDot11FCSErrorCount',
+'bsnAPIfDot11TransmittedFrameCount',
+'bsnAPIfDot11WEPUndecryptableCount',
+'bsnAPIfDot11FailedCount',
+'bsnAPIfLoadRxUtilization',
+'bsnAPIfLoadTxUtilization',
+'bsnAPIfLoadChannelUtilization',
+'bsnAPIfLoadNumOfClients',
+'bsnAPIfPoorSNRClients']
+
+# drop rows with missing values
+df.dropna(inplace=True)
+
+# change data types of rows
+df = df.astype({c: 'int64' for c in df.columns if c != 'datetime' and c != 'location' })
+
+df.head()
+
+
+# In[ ]:
+
+
+
 
